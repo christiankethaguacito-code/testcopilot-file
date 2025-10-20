@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name — Frontend Developer</title>
+
+  <!-- SEO & Social preview -->
+  <meta name="description" content="Your Name — frontend developer. I build fast, accessible, and delightful web experiences." />
+  <meta property="og:title" content="Your Name — Frontend Developer" />
+  <meta property="og:description" content="I build fast, accessible, and delightful web experiences. View my projects and get in touch." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Your+Name" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Tailwind (Play CDN for quick prototypes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f5f7ff', 100: '#e6edff', 500: '#3b82f6' }
+          },
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','-apple-system','Segoe UI','Roboto','Helvetica','Arial'] }
+        }
+      }
+    }
+  </script>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- htmx -->
+  <script src="https://unpkg.com/htmx.org@1.11.1"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="font-sans bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 relative">
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/60 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <a href="#hero" class="flex items-center gap-3">
+        <!-- Avatar + name (responsive, larger) -->
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden relative flex-shrink-0">
+            <img id="ownerAvatar" src="assets/images/owner.jpg" alt="Selwyn Senillo" class="w-full h-full object-cover rounded-lg hidden" />
+            <div id="initials" class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-500 to-blue-400 text-white font-bold text-lg sm:text-2xl shadow-md">YN</div>
+          </div>
+
+          <div class="hidden sm:block">
+            <div class="font-semibold text-lg sm:text-xl leading-tight">Selwyn Senillo</div>
+            <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400">Frontend Developer</div>
+          </div>
+        </div>
+      </a>
+
+      <nav class="flex items-center gap-3">
+        <button id="mobileMenuButton" class="sm:hidden p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">
+          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="#projects" class="px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+          <a href="#about" class="px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="#" class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm hover:bg-slate-100 dark:hover:bg-slate-800" title="GitHub" aria-label="GitHub">
+            <!-- GitHub SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.35-1.77-1.35-1.77-1.1-.75.08-.74.08-.74 1.22.09 1.87 1.25 1.87 1.25 1.08 1.86 2.83 1.32 3.52 1.01.11-.8.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.28-1.55 3.29-1.23 3.29-1.23.67 1.65.25 2.87.12 3.17.77.84 1.23 1.9 1.23 3.22 0 4.6-2.82 5.61-5.5 5.9.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0012 .5z"/></svg>
+          </a>
+
+          <a href="#" class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm hover:bg-slate-100 dark:hover:bg-slate-800" title="LinkedIn" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.85 6 2.48 6S0 4.88 0 3.5 1.13 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4v12h-4V8zm7.5 0h3.83v1.64h.05c.53-1 1.82-2.07 3.74-2.07 4 0 4.73 2.63 4.73 6.05V20h-4V14.8c0-1.23-.02-2.82-1.72-2.82-1.72 0-1.98 1.34-1.98 2.73V20h-4V8z"/></svg>
+          </a>
+
+          <a href="#resume" download="YourName-Resume.pdf" class="px-3 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-md text-sm hover:from-indigo-500">Resume</a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile scrim -->
+    <div id="mobileScrim" class="fixed inset-0 bg-black/40 hidden z-40" aria-hidden="true"></div>
+
+    <!-- Mobile sliding menu panel -->
+    <div id="mobileMenu" class="fixed top-0 right-0 w-11/12 max-w-xs h-full bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-xl z-50" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
+      <div class="p-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-400 flex items-center justify-center text-white font-bold shadow-md">YN</div>
+          <div class="font-semibold">Your Name</div>
+        </div>
+        <button id="mobileMenuClose" class="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close menu">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-4 space-y-3">
+        <a href="#projects" class="block px-3 py-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+        <a href="#about" class="block px-3 py-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+        <a href="#contact" class="block px-3 py-3 rounded-md bg-gradient-to-r from-indigo-600 to-blue-500 text-white">Contact</a>
+        <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+          <a href="#" class="block px-3 py-2 rounded-md hover:bg-slate-100">GitHub</a>
+          <a href="#" class="block px-3 py-2 rounded-md hover:bg-slate-100">LinkedIn</a>
+          <a href="#resume" download="YourName-Resume.pdf" class="block px-3 py-2 rounded-md bg-indigo-600 text-white">Download resume</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- accents -->
+  <div class="page-accent left-[-10%] top-[-10%] w-72 h-72 rounded-full bg-gradient-to-br from-indigo-400 to-blue-300 opacity-60"></div>
+  <div class="page-accent right-[-12%] bottom-[-10%] w-96 h-96 rounded-full bg-gradient-to-br from-pink-300 to-amber-200 opacity-30"></div>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <section id="hero" class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight animate-fade-in" style="--delay:0ms">Hi, I'm Your Name — I build beautiful web experiences.</h1>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300 animate-fade-in" style="--delay:80ms">I focus on front-end engineering using modern tools: Tailwind CSS, htmx, and vanilla JavaScript. I enjoy building fast, accessible interfaces.</p>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-3 animate-fade-in" style="--delay:140ms">
+          <a href="#projects" class="w-full sm:w-auto text-center px-4 py-3 rounded-md border border-indigo-600 text-indigo-600 hover:bg-indigo-50">View projects</a>
+          <a href="#contact" class="w-full sm:w-auto text-center px-4 py-3 rounded-md bg-gradient-to-r from-indigo-600 to-blue-500 text-white hover:from-indigo-500">Get in touch</a>
+        </div>
+
+        <div class="mt-8 p-4 rounded-lg glass border border-slate-100 dark:border-slate-700 animate-fade-in" style="--delay:200ms">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex-1">
+              <div class="text-sm text-slate-500 dark:text-slate-400">Random quote (htmx demo)</div>
+              <div id="quote" class="mt-2 text-sm text-slate-700 dark:text-slate-200">Click "New quote" to fetch one from an API.</div>
+            </div>
+            <div class="flex-shrink-0">
+              <button id="quoteBtn" class="px-3 py-2 bg-slate-100 dark:bg-slate-700 rounded-md">New quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-first md:order-last flex justify-center">
+        <div class="w-72 h-72 bg-gradient-to-br from-indigo-500 to-blue-400 rounded-3xl flex items-center justify-center text-white text-center p-8 shadow-2xl transform transition hover:scale-105 animate-fade-in" style="--delay:240ms">
+          <div>
+            <div class="text-2xl font-semibold">Design × Code</div>
+            <div class="mt-2 text-sm opacity-90">Clean interfaces, solid code.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="mt-16">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-semibold">Projects</h2>
+        <div class="flex gap-2">
+          <button data-filter="*" class="filter-btn px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-sm">All</button>
+          <button data-filter="web" class="filter-btn px-3 py-1 rounded-md text-sm">Web</button>
+          <button data-filter="ui" class="filter-btn px-3 py-1 rounded-md text-sm">UI</button>
+          <button data-filter="tooling" class="filter-btn px-3 py-1 rounded-md text-sm">Tooling</button>
+        </div>
+      </div>
+
+      <div id="projectsGrid" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Project card template (with thumbnail placeholder) -->
+        <article class="project-card p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition animate-fade-in" data-tags="web ui">
+          <div class="mb-3 rounded-md overflow-hidden">
+            <img src="assets/images/project-alpha.svg" alt="Project Alpha thumbnail" class="w-full h-40 object-cover" loading="lazy" />
+          </div>
+          <h3 class="font-semibold">Project Alpha</h3>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">A landing page built with Tailwind and accessible components.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-xs text-slate-400">Web · UI</div>
+            <button class="view-btn inline-flex items-center gap-2 text-indigo-600 text-sm">View <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></button>
+          </div>
+        </article>
+
+        <article class="project-card p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition animate-fade-in" data-tags="tooling">
+          <div class="mb-3 rounded-md overflow-hidden">
+            <img src="assets/images/build-tool.svg" alt="Build Tool thumbnail" class="w-full h-40 object-cover" loading="lazy" />
+          </div>
+          <h3 class="font-semibold">Build Tool</h3>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">A small CLI that automates deploy tasks.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-xs text-slate-400">Tooling</div>
+            <button class="view-btn inline-flex items-center gap-2 text-indigo-600 text-sm">View <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></button>
+          </div>
+        </article>
+
+        <article class="project-card p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition animate-fade-in" data-tags="web">
+          <div class="mb-3 rounded-md overflow-hidden">
+            <img src="assets/images/portfolio-cms.svg" alt="Portfolio CMS thumbnail" class="w-full h-40 object-cover" loading="lazy" />
+          </div>
+          <h3 class="font-semibold">Portfolio CMS</h3>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">A tiny headless CMS for personal sites.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-xs text-slate-400">Web</div>
+            <button class="view-btn inline-flex items-center gap-2 text-indigo-600 text-sm">View <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></button>
+          </div>
+        </article>
+
+        <article class="project-card p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition animate-fade-in" data-tags="ui">
+          <div class="mb-3 rounded-md overflow-hidden">
+            <img src="assets/images/ui-kit.svg" alt="UI Kit" class="w-full h-40 object-cover" loading="lazy" />
+          </div>
+          <h3 class="font-semibold">UI Kit</h3>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Reusable components and Figma tokens.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-xs text-slate-400">UI</div>
+            <button class="view-btn inline-flex items-center gap-2 text-indigo-600 text-sm">View <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></button>
+          </div>
+        </article>
+
+        <article class="project-card p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition animate-fade-in" data-tags="web tooling">
+          <div class="mb-3 rounded-md overflow-hidden">
+            <img src="assets/images/design-system-docs.svg" alt="Design System Docs" class="w-full h-40 object-cover" loading="lazy" />
+          </div>
+          <h3 class="font-semibold">Design System Docs</h3>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Documentation site for a design system.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-xs text-slate-400">Web · Tooling</div>
+            <button class="view-btn inline-flex items-center gap-2 text-indigo-600 text-sm">View <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></button>
+          </div>
+        </article>
+
+        <article class="project-card p-6 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-lg transform hover:-translate-y-1 transition animate-fade-in" data-tags="ui">
+          <div class="mb-3 rounded-md overflow-hidden">
+            <img src="assets/images/motion-experiments.svg" alt="Motion Experiments" class="w-full h-40 object-cover" loading="lazy" />
+          </div>
+          <h3 class="font-semibold">Motion Experiments</h3>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Micro-interactions and prototypes.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-xs text-slate-400">UI</div>
+            <button class="view-btn inline-flex items-center gap-2 text-indigo-600 text-sm">View <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></button>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-6 text-center">
+        <button id="loadMore" class="px-4 py-2 rounded-md border">Load more</button>
+      </div>
+    </section>
+
+    <section id="about" class="mt-16">
+      <h2 class="text-2xl font-semibold">About</h2>
+      <div class="mt-4 text-slate-600 dark:text-slate-300">I'm a frontend-focused developer who cares about performance, accessibility and delightful UX. I work with teams to ship production-ready interfaces.</div>
+    </section>
+
+    <section id="contact" class="mt-16">
+      <h2 class="text-2xl font-semibold">Contact</h2>
+      <form id="contactForm" class="mt-4 max-w-2xl grid gap-3" method="POST" action="#">
+        <input id="name" name="name" placeholder="Your name" class="w-full px-3 py-3 rounded-md border bg-white dark:bg-slate-800" required />
+        <input id="email" name="email" type="email" placeholder="you@example.com" class="w-full px-3 py-3 rounded-md border bg-white dark:bg-slate-800" required />
+        <textarea id="message" name="message" rows="5" placeholder="Message" class="w-full px-3 py-3 rounded-md border bg-white dark:bg-slate-800" required></textarea>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <button type="submit" class="w-full sm:w-auto px-4 py-3 rounded-md bg-gradient-to-r from-indigo-600 to-blue-500 text-white">Send message</button>
+          <div id="contactStatus" class="text-sm text-slate-500"></div>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-100 dark:border-slate-800 py-6 mt-12">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm text-slate-500">© <span id="year"></span> Your Name — Built with Tailwind & htmx • <a href="#resume" download="YourName-Resume.pdf" class="underline">Download resume</a></div>
+  </footer>
+
+  <!-- Modal (hidden) -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/40" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-inner bg-white dark:bg-slate-900 rounded-lg p-6 max-w-lg w-full">
+      <div class="flex items-start justify-between">
+        <button id="modalClose" class="ml-auto block text-slate-500">Close</button>
+      </div>
+      <div class="modal-content-scroll mt-4" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    const img = document.getElementById('ownerAvatar');
+    const initials = document.getElementById('initials');
+    ({
+      exists: !!img,
+      srcAttr: img?.getAttribute('src'),
+      srcResolved: img?.src,
+      complete: img?.complete,
+      naturalWidth: img?.naturalWidth,
+      imgClass: img?.className,
+      initialsClass: initials?.className
+    });
+    img.classList.remove('hidden'); initials.classList.add('hidden');
+  </script>
+</body>
+</html>

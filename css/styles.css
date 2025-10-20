@@ -1,0 +1,17 @@
+.page-accent { position: absolute; pointer-events: none; filter: blur(48px); opacity: 0.55; }
+.animate-fade-in { animation: fadeIn 500ms ease var(--delay,0ms) both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.glass { background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.55)); backdrop-filter: blur(6px); }
+@media (prefers-color-scheme: dark) { .glass { background: rgba(17,24,39,0.4); } }
+:focus { outline: 2px solid transparent; outline-offset: 2px; }
+:focus-visible { outline: 2px solid rgba(59,130,246,0.6); border-radius: 6px; }
+/* Mobile menu transform animation */
+#mobileMenu { transform: translateX(110%); transition: transform 320ms cubic-bezier(.2,.9,.2,1); }
+#mobileMenu.open { transform: translateX(0); }
+/* scrim */
+#mobileScrim { opacity: 0; pointer-events: none; transition: opacity 220ms; }
+#mobileScrim.open { opacity: 1; pointer-events: auto; }
+@media (max-width:640px){
+  #modal .modal-inner{ width:100%; height:100%; border-radius:0; padding:18px }
+  #modal .modal-content-scroll{ overflow-y:auto; max-height:calc(100% - 48px); }
+}
